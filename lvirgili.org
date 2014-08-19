@@ -1,0 +1,8 @@
+* Starter kit additional stuff that should be loaded
+
+#+begin_src emacs-lisp
+  (starter-kit-load "python")
+  (starter-kit-load "org")
+  (starter-kit-load "ruby")
+  (starter-kit-load "yasnippet")
+#+end_src
