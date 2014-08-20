@@ -1,15 +1,11 @@
 * Starter kit additional stuff that should be loaded
-
-  TODO: Check out why ruby mode fails to load
 #+begin_src emacs-lisp
   (starter-kit-load "python")
   (starter-kit-load "org")
-  (starter-kit-load "yasnippet")
 #+end_src
 
 * Aesthetics
 ** Theme
-
    Solarized is the best theme ever.
 
    Let's install it if needed:
@@ -22,7 +18,6 @@
 #+end_src
 
 ** Rainbow delimiters
-
    Because life is colorless enough.
 
 #+begin_src emacs-lisp
@@ -31,21 +26,17 @@
 #+end_src emacs-lisp
 
 ** Lost in stupid parenthesis
-
 #+begin_src emacs-lisp
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 #+end_src
 
 ** Line numbers
-
 #+begin_src emacs-lisp
-(starter-kit-install-if-needed 'nlinum)
-(global-nlinum-mode)
+(global-linum-mode)
 #+end_src
 
 ** Whitespace is from the devil
-
    Let's mark it, then.
 #+begin_src emacs-lisp
   (require 'whitespace)
@@ -55,7 +46,6 @@
 #+end_src
 
 ** yes/no -> y/n
-
    Ain't nobody got the time for that!
 #+BEGIN_SRC emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
@@ -63,7 +53,6 @@
 #+END_SRC
 
 ** Tabs
-
    Making tabs behave.
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
@@ -71,27 +60,19 @@
 #+END_SRC
 
 ** Fonts
-
    I'm blind, ok?
-#+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default nil :height 120)
-#+END_SRC
-** Column
+#+begin_src emacs-lisp
+;(set-face-attribute 'default nil :height 120)
+#+end_src
 
+** Column
    I like seeing the column number.
 #+BEGIN_SRC emacs-lisp
-(setq column-number-mode t)
+  (setq column-number-mode t)
 #+END_SRC
-
-** Line highlighting
-
-#+begin_src emacs-lisp
-(global-hl-line-mode 1)
-#+end_src
 
 * Movement
 ** god mode
-
    God mode answers your prayers. Emacs + vim in a nice way.
 #+begin_src emacs-lisp
   (starter-kit-install-if-needed 'god-mode)
@@ -100,7 +81,6 @@
 #+end_src
 
 ** ace-jump
-
    Borrowed from vim also.
 #+begin_src emacs-lisp
   (starter-kit-install-if-needed 'ace-jump-mode)
@@ -109,7 +89,6 @@
 
 * Code completion
 ** autopair
-
    Who wants to close }?
 #+begin_src emacs-lisp
 (starter-kit-install-if-needed 'autopair)
@@ -126,4 +105,13 @@
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (save-excursion (backward-word 1) (point)) (point)))))
+#+end_src
+** Make solarized work with daemon
+#+begin_src emacs-lisp
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+        (lambda (frame)
+            (with-selected-frame frame
+                (load-theme 'solarized-dark t))))
+    (load-theme 'solarized-dark t))
 #+end_src
