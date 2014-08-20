@@ -2,6 +2,13 @@
 #+begin_src emacs-lisp
   (starter-kit-load "python")
   (starter-kit-load "org")
+  (starter-kit-load "yasnippet")
+#+end_src
+I don't like yasnippet everywhere, though.
+
+#+begin_src emacs-lisp
+  (yas-global-mode 0)
+  (flyspell-mode)
 #+end_src
 
 * Aesthetics
