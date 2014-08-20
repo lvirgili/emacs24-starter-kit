@@ -1,7 +1,129 @@
 * Starter kit additional stuff that should be loaded
 
+  TODO: Check out why ruby mode fails to load
 #+begin_src emacs-lisp
   (starter-kit-load "python")
   (starter-kit-load "org")
   (starter-kit-load "yasnippet")
+#+end_src
+
+* Aesthetics
+** Theme
+
+   Solarized is the best theme ever.
+
+   Let's install it if needed:
+#+begin_src emacs-lisp
+  (starter-kit-install-if-needed 'color-theme-solarized)
+#+end_src
+   Now load it:
+#+begin_src emacs-lisp
+  (load-theme 'solarized-dark t)
+#+end_src
+
+** Rainbow delimiters
+
+   Because life is colorless enough.
+
+#+begin_src emacs-lisp
+(starter-kit-install-if-needed 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
+#+end_src emacs-lisp
+
+** Lost in stupid parenthesis
+
+#+begin_src emacs-lisp
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+#+end_src
+
+** Line numbers
+
+#+begin_src emacs-lisp
+(starter-kit-install-if-needed 'nlinum)
+(global-nlinum-mode)
+#+end_src
+
+** Whitespace is from the devil
+
+   Let's mark it, then.
+#+begin_src emacs-lisp
+  (require 'whitespace)
+  (setq whitespace-line-column 80)
+  (setq whitespace-style '(face trailing tabs lines-tail))
+  (global-whitespace-mode t)
+#+end_src
+
+** yes/no -> y/n
+
+   Ain't nobody got the time for that!
+#+BEGIN_SRC emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (set-variable 'confirm-kill-emacs 'yes-or-no-p)
+#+END_SRC
+
+** Tabs
+
+   Making tabs behave.
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+  (setq tab-width 4)
+#+END_SRC
+
+** Fonts
+
+   I'm blind, ok?
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :height 120)
+#+END_SRC
+** Column
+
+   I like seeing the column number.
+#+BEGIN_SRC emacs-lisp
+(setq column-number-mode t)
+#+END_SRC
+
+** Line highlighting
+
+#+begin_src emacs-lisp
+(global-hl-line-mode 1)
+#+end_src
+
+* Movement
+** god mode
+
+   God mode answers your prayers. Emacs + vim in a nice way.
+#+begin_src emacs-lisp
+  (starter-kit-install-if-needed 'god-mode)
+  (require 'god-mode)
+  (global-set-key (kbd "<escape>") 'god-local-mode)
+#+end_src
+
+** ace-jump
+
+   Borrowed from vim also.
+#+begin_src emacs-lisp
+  (starter-kit-install-if-needed 'ace-jump-mode)
+  (define-key global-map (kbd "C-c s") 'ace-jump-mode)
+#+end_src
+
+* Code completion
+** autopair
+
+   Who wants to close }?
+#+begin_src emacs-lisp
+(starter-kit-install-if-needed 'autopair)
+(require 'autopair)
+(autopair-global-mode)
+#+end_src
+
+* Custom functions
+** C-w deletes backward when not in region
+#+begin_src language
+(defadvice kill-region (before unix-werase activate compile)
+  "When called interactively with no active region, delete a single word
+    backwards instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (save-excursion (backward-word 1) (point)) (point)))))
 #+end_src
