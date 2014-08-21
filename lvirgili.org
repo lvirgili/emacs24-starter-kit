@@ -69,7 +69,7 @@ I don't like yasnippet everywhere, though.
 ** Fonts
    I'm blind, ok?
 #+begin_src emacs-lisp
-;(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 120)
 #+end_src
 
 ** Column
@@ -112,6 +112,7 @@ I don't like yasnippet everywhere, though.
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (save-excursion (backward-word 1) (point)) (point)))))
+
 #+end_src
 ** Make solarized work with daemon
 #+begin_src emacs-lisp
@@ -121,4 +122,24 @@ I don't like yasnippet everywhere, though.
             (with-selected-frame frame
                 (load-theme 'solarized-dark t))))
     (load-theme 'solarized-dark t))
+#+end_src
+* Orgmobile
+  Let's see if this works.
+
+#+begin_src emacs-lisp
+  (setq org-directory "~/org/")
+  (setq org-mobile-directory "~/Dropbox/MobileOrg/")
+  (setq org-mobile-inbox-for-pull (concat org-directory "/index.org"))
+  (setq org-mobile-files '("~/org/todos.org"))
+#+end_src
+
+  Do not like the american calendar format.
+#+begin_src emacs-lisp
+  (setq calendar-date-display-form '((if dayname (concat dayname " ")) day "/" monthname "/" year))
+#+end_src
+
+* C stuff
+#+begin_src emacs-lisp
+  (setq c-default-style "linux"
+        c-basic-offset 4)
 #+end_src
