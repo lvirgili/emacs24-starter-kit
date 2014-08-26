@@ -98,9 +98,9 @@ I don't like yasnippet everywhere, though.
 ** autopair
    Who wants to close }?
 #+begin_src emacs-lisp
-(starter-kit-install-if-needed 'autopair)
-(require 'autopair)
-(autopair-global-mode)
+  (starter-kit-install-if-needed 'autopair)
+  (require 'autopair)
+  (autopair-global-mode)
 #+end_src
 
 * Custom functions
@@ -142,4 +142,27 @@ I don't like yasnippet everywhere, though.
 #+begin_src emacs-lisp
   (setq c-default-style "linux"
         c-basic-offset 4)
+#+end_src
+* J
+#+begin_src emacs-lisp
+  (starter-kit-install-if-needed 'j-mode)
+  (autoload 'j-mode "j-mode.el"  "Major mode for J." t)
+  (autoload 'j-shell "j-mode.el" "Run J from emacs." t)
+  (setq auto-mode-alist
+        (cons '("\\.ij[rstp]" . j-mode) auto-mode-alist))
+  (setq j-command "/usr/bin/jconsole")
+  (setq j-console-cmd "jc")
+  (setq j-path "~/j802-64/")
+#+end_src
+* Org-babel languages
+#+begin_src emacs-lisp
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((C . t)
+       (J . t)
+       (emacs-lisp . t)
+       ))
+    (setq org-confirm-babel-evaluate nil)
+    (setq org-src-lang-modes (quote (("J" . j) ("elisp" . emacs-lisp))))
+
 #+end_src
