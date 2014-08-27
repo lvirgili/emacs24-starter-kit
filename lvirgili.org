@@ -164,5 +164,5 @@ I don't like yasnippet everywhere, though.
        ))
     (setq org-confirm-babel-evaluate nil)
     (setq org-src-lang-modes (quote (("J" . j) ("elisp" . emacs-lisp))))
-
 #+end_src
+
