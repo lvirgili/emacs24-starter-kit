@@ -145,14 +145,15 @@ I don't like yasnippet everywhere, though.
 #+end_src
 * J
 #+begin_src emacs-lisp
-  (starter-kit-install-if-needed 'j-mode)
-  (autoload 'j-mode "j-mode.el"  "Major mode for J." t)
-  (autoload 'j-shell "j-mode.el" "Run J from emacs." t)
-  (setq auto-mode-alist
-        (cons '("\\.ij[rstp]" . j-mode) auto-mode-alist))
-  (setq j-command "/usr/bin/jconsole")
+    (starter-kit-install-if-needed 'j-mode)
+    (autoload 'j-mode "j-mode.el"  "Major mode for J." t)
+    (autoload 'j-shell "j-mode.el" "Run J from emacs." t)
+    (setq auto-mode-alist
+          (cons '("\\.ij[rstp]" . j-mode) auto-mode-alist))
+    (setq j-command "/usr/bin/jconsole")
   (setq j-console-cmd "jc")
   (setq j-path "~/j802-64/")
+  (setq j-program-name "jc" )
 #+end_src
 * Org-babel languages
 #+begin_src emacs-lisp
