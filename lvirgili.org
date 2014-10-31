@@ -162,8 +162,44 @@ I don't like yasnippet everywhere, though.
      '((C . t)
        (J . t)
        (emacs-lisp . t)
+       (dot . t)
        ))
     (setq org-confirm-babel-evaluate nil)
     (setq org-src-lang-modes (quote (("J" . j) ("elisp" . emacs-lisp))))
 #+end_src
 
+* Ispell
+  I don't speak English.
+
+#+begin_src emacs-lisp
+(setq ispell-dictionary "brasileiro")
+#+end_src
+* Latex and org
+** Minted for listings
+  Let's go with minted.
+#+begin_src emacs-lisp
+  (require 'ox-latex)
+  (require 'org-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+
+  (setq org-latex-listings 'minted)
+
+  (setq org-latex-minted-options
+        '(("frame" "lines") ("linenos=true")))
+
+  (setq org-latex-pdf-process (list "latexmk -pdf %f"))
+#+end_src
+
+
+** Tufte
+#+begin_src emacs-lisp
+(add-to-list 'org-latex-classes
+               `("tufte"
+                 "\\documentclass{tufte-handout}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" "\\newpage" "\\subsection*{%s}" "\\newpage")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+               )
+#+end_src
